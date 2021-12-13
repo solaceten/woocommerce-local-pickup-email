@@ -9,6 +9,16 @@
 	 * @package     WooCommerce/Classes/Emails
 	 * @extends     WC_Email
 	 */
+
+
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+
+
+
 	class WC_Local_Order_Complete_Email extends WC_Email {
 
 		/**
@@ -17,8 +27,8 @@
 		public function __construct() {
 			$this->id             = 'customer_local_order_completed_order';
 			$this->customer_email = true;
-			$this->title          = __( 'Local Order Completed', 'woocommerce' );
-			$this->description    = __( 'Local order complete emails are sent to customers when their orders are marked completed.', 'woocommerce' );
+			$this->title          = __( 'Click and Collect Is Complete', 'woocommerce' );
+			$this->description    = __( 'Final Local Order Notification email is sent once the order is marked as complete.', 'woocommerce' );
 			$this->template_html  = 'emails/customer-completed-order.php';
 			$this->template_plain = 'emails/plain/customer-completed-order.php';
 			$this->placeholders   = array(
@@ -47,6 +57,7 @@
 				$order = wc_get_order( $order_id );
 			}
 			
+			// check if this is local pickup
 			if ($order->has_shipping_method('local_pickup')){
 			
 			if ( is_a( $order, 'WC_Order' ) ) {
@@ -71,7 +82,7 @@
 		 * @return string
 		 */
 		public function get_default_subject() {
-			return __( 'Your order is complete, and ready for pick-up.', 'woocommerce' );
+			return __( 'Your Pickup Order is Now Available for Collection.', 'woocommerce' );
 		}
 
 		/**
@@ -146,6 +157,15 @@
 					'description' => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>{site_title}, {order_date}, {order_number}</code>' ),
 					'placeholder' => $this->get_default_heading(),
 					'default'     => '',
+				),
+				'additional_content' => array(
+				'title'       => __( 'Additional content', 'woocommerce' ),
+				'description' => __( 'Text to appear below the main email content.', 'woocommerce' ) . ' ' . $placeholder_text,
+				'css'         => 'width:400px; height: 75px;',
+				'placeholder' => __( 'N/A', 'woocommerce' ),
+				'type'        => 'textarea',
+				'default'     => $this->get_default_additional_content(),
+				'desc_tip'    => true,
 				),
 				'email_type' => array(
 					'title'       => __( 'Email type', 'woocommerce' ),

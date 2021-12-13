@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$this->customer_email = true;
 
 			$this->title          = __( 'Local Order', 'woocommerce' );
-			$this->description    = __( 'Local Order Notification emails are sent for customer that select local pickup.', 'woocommerce' );
+			$this->description    = __( 'This Local Order Notification email is sent to the customer upon order placement.', 'woocommerce' );
 		    $this->template_html  = 'emails/customer-processing-order.php';
 			$this->template_plain = 'emails/plain/customer-processing-order.php';
 			$this->placeholders   = array(
@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return string
 		 */
 		public function get_default_subject() {
-			return __( 'Local Pick-up Confirmation', 'woocommerce' );
+			return __( 'Your Click and Collect Order is Processing', 'woocommerce' );
 		}
 
 		/**
@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return string
 		 */
 		public function get_default_heading() {
-			return __( 'Local pick-up is available 24 hours after initial order.', 'woocommerce' );
+			return __( 'Your Click and Collect is being prepared.', 'woocommerce' );
 		}
 
 		/**
